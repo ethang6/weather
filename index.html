@@ -1,18 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Weather App</title>
+    <style>
+      .input-group { display: none; margin-top: 10px; }
+    </style>
+    <script>
+      function toggleInputs() {
+        const method = document.getElementById("method").value;
+        document.getElementById("cityIdGroup").style.display = method === "city" ? "block" : "none";
+        document.getElementById("latLongGroup").style.display = method === "latlong" ? "block" : "none";
+      }
+    </script>
   </head>
   <body>
 
-    <h1>Weather API Results</h1>
+    <h1>Weather API Lookup</h1>
 
     <form action="/" method="post">
-        <label for="zipInput">Zip Code: </label>
-        <input id = "zipInput" type="text" name="zipInput">
-        <button type="submit">Go</button>
+      <label for="method">Choose a lookup method:</label>
+      <select id="method" name="method" onchange="toggleInputs()">
+        <option value="city">City ID</option>
+        <option value="latlong">Latitude/Longitude</option>
+      </select>
+
+      <div id="cityIdGroup" class="input-group">
+        <label for="cityId">City ID:</label>
+        <input id="cityId" type="text" name="cityIdInput" />
+      </div>
+
+      <div id="latLongGroup" class="input-group">
+        <label for="lat">Latitude:</label>
+        <input id="lat" type="text" name="latInput" />
+        <br />
+        <label for="lon">Longitude:</label>
+        <input id="lon" type="text" name="lonInput" />
+      </div>
+
+      <br />
+      <button type="submit">Get Weather</button>
     </form>
 
+    <script>
+      // Show default option on load
+      toggleInputs();
+    </script>
+    
   </body>
 </html>
+
